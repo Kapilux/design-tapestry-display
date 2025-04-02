@@ -1,8 +1,48 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
+  useEffect(() => {
+    // Animation for bubbles moving in circular paths
+    const uxBubble = document.getElementById('ux-bubble');
+    const uiBubble = document.getElementById('ui-bubble');
+    const cxBubble = document.getElementById('cx-bubble');
+    
+    if (uxBubble && uiBubble && cxBubble) {
+      let uxAngle = 0;
+      let uiAngle = 120; // Start at different positions
+      let cxAngle = 240; // Start at different positions
+      
+      const animateBubbles = () => {
+        // UX bubble animation - smaller radius
+        const uxRadius = 110;
+        const uxX = Math.cos(uxAngle * (Math.PI / 180)) * uxRadius;
+        const uxY = Math.sin(uxAngle * (Math.PI / 180)) * uxRadius;
+        uxBubble.style.transform = `translate(${uxX}px, ${uxY}px)`;
+        uxAngle = (uxAngle + 0.1) % 360; // Slow movement
+        
+        // UI bubble animation
+        const uiRadius = 140;
+        const uiX = Math.cos(uiAngle * (Math.PI / 180)) * uiRadius;
+        const uiY = Math.sin(uiAngle * (Math.PI / 180)) * uiRadius;
+        uiBubble.style.transform = `translate(${uiX}px, ${uiY}px)`;
+        uiAngle = (uiAngle + 0.15) % 360; // Different speed
+        
+        // CX bubble animation
+        const cxRadius = 125;
+        const cxX = Math.cos(cxAngle * (Math.PI / 180)) * cxRadius;
+        const cxY = Math.sin(cxAngle * (Math.PI / 180)) * cxRadius;
+        cxBubble.style.transform = `translate(${cxX}px, ${cxY}px)`;
+        cxAngle = (cxAngle + 0.12) % 360; // Different speed
+        
+        requestAnimationFrame(animateBubbles);
+      };
+      
+      animateBubbles();
+    }
+  }, []);
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -38,13 +78,13 @@ const Hero = () => {
                 <div className="w-[50%] h-[50%] rounded-full bg-primary/5 border-[1px] border-primary/10"></div>
               </div>
             </div>
-            <div className="absolute w-20 h-20 -top-4 right-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white">
+            <div id="ux-bubble" className="absolute w-20 h-20 -top-4 right-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
               <span className="text-sm font-medium">UX</span>
             </div>
-            <div className="absolute w-20 h-20 bottom-20 -left-10 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white">
+            <div id="ui-bubble" className="absolute w-20 h-20 bottom-20 -left-10 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
               <span className="text-sm font-medium">UI</span>
             </div>
-            <div className="absolute w-20 h-20 bottom-0 right-24 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white">
+            <div id="cx-bubble" className="absolute w-20 h-20 bottom-0 right-24 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
               <span className="text-sm font-medium">CX</span>
             </div>
           </div>
