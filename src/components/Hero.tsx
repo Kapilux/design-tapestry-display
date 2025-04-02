@@ -1,8 +1,10 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
+  const animationRef = useRef<number | null>(null);
+
   useEffect(() => {
     // Animation for bubbles moving in circular paths
     const uxBubble = document.getElementById('ux-bubble');
@@ -16,31 +18,38 @@ const Hero = () => {
       
       const animateBubbles = () => {
         // UX bubble animation - smaller radius
-        const uxRadius = 110;
+        const uxRadius = 80;
         const uxX = Math.cos(uxAngle * (Math.PI / 180)) * uxRadius;
         const uxY = Math.sin(uxAngle * (Math.PI / 180)) * uxRadius;
         uxBubble.style.transform = `translate(${uxX}px, ${uxY}px)`;
-        uxAngle = (uxAngle + 0.1) % 360; // Slow movement
+        uxAngle = (uxAngle + 0.05) % 360; // Slower, more subtle movement
         
         // UI bubble animation
-        const uiRadius = 140;
+        const uiRadius = 95;
         const uiX = Math.cos(uiAngle * (Math.PI / 180)) * uiRadius;
         const uiY = Math.sin(uiAngle * (Math.PI / 180)) * uiRadius;
         uiBubble.style.transform = `translate(${uiX}px, ${uiY}px)`;
-        uiAngle = (uiAngle + 0.15) % 360; // Different speed
+        uiAngle = (uiAngle + 0.04) % 360; // Slower, more subtle movement
         
         // CX bubble animation
-        const cxRadius = 125;
+        const cxRadius = 110;
         const cxX = Math.cos(cxAngle * (Math.PI / 180)) * cxRadius;
         const cxY = Math.sin(cxAngle * (Math.PI / 180)) * cxRadius;
         cxBubble.style.transform = `translate(${cxX}px, ${cxY}px)`;
-        cxAngle = (cxAngle + 0.12) % 360; // Different speed
+        cxAngle = (cxAngle + 0.035) % 360; // Slower, more subtle movement
         
-        requestAnimationFrame(animateBubbles);
+        animationRef.current = requestAnimationFrame(animateBubbles);
       };
       
       animateBubbles();
     }
+    
+    // Cleanup function to cancel animation frame on unmount
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, []);
 
   const scrollToProjects = () => {
@@ -78,13 +87,13 @@ const Hero = () => {
                 <div className="w-[50%] h-[50%] rounded-full bg-primary/5 border-[1px] border-primary/10"></div>
               </div>
             </div>
-            <div id="ux-bubble" className="absolute w-20 h-20 -top-4 right-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
+            <div id="ux-bubble" className="absolute w-20 h-20 -top-4 right-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">UX</span>
             </div>
-            <div id="ui-bubble" className="absolute w-20 h-20 bottom-20 -left-10 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
+            <div id="ui-bubble" className="absolute w-20 h-20 bottom-20 -left-10 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">UI</span>
             </div>
-            <div id="cx-bubble" className="absolute w-20 h-20 bottom-0 right-24 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-1000">
+            <div id="cx-bubble" className="absolute w-20 h-20 bottom-0 right-24 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">CX</span>
             </div>
           </div>
