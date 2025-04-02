@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, Mail, Linkedin, Github } from 'lucide-react';
-import { toast } from '@/components/ui/sonner';
+import { toast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
