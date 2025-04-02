@@ -18,21 +18,21 @@ const Hero = () => {
       
       const animateBubbles = () => {
         // UX bubble animation - smaller radius
-        const uxRadius = 80;
+        const uxRadius = 60; // Reduced radius to stay inside main circle
         const uxX = Math.cos(uxAngle * (Math.PI / 180)) * uxRadius;
         const uxY = Math.sin(uxAngle * (Math.PI / 180)) * uxRadius;
         uxBubble.style.transform = `translate(${uxX}px, ${uxY}px)`;
         uxAngle = (uxAngle + 0.05) % 360; // Slower, more subtle movement
         
         // UI bubble animation
-        const uiRadius = 95;
+        const uiRadius = 75; // Reduced radius to stay inside main circle
         const uiX = Math.cos(uiAngle * (Math.PI / 180)) * uiRadius;
         const uiY = Math.sin(uiAngle * (Math.PI / 180)) * uiRadius;
         uiBubble.style.transform = `translate(${uiX}px, ${uiY}px)`;
         uiAngle = (uiAngle + 0.04) % 360; // Slower, more subtle movement
         
         // CX bubble animation
-        const cxRadius = 110;
+        const cxRadius = 50; // Reduced radius to stay inside main circle
         const cxX = Math.cos(cxAngle * (Math.PI / 180)) * cxRadius;
         const cxY = Math.sin(cxAngle * (Math.PI / 180)) * cxRadius;
         cxBubble.style.transform = `translate(${cxX}px, ${cxY}px)`;
@@ -87,13 +87,14 @@ const Hero = () => {
                 <div className="w-[50%] h-[50%] rounded-full bg-primary/5 border-[1px] border-primary/10"></div>
               </div>
             </div>
-            <div id="ux-bubble" className="absolute w-20 h-20 -top-4 right-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
+            {/* Repositioned bubbles to be initially inside the circle */}
+            <div id="ux-bubble" className="absolute w-16 h-16 top-1/4 right-1/4 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">UX</span>
             </div>
-            <div id="ui-bubble" className="absolute w-20 h-20 bottom-20 -left-10 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
+            <div id="ui-bubble" className="absolute w-16 h-16 bottom-1/4 left-1/4 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">UI</span>
             </div>
-            <div id="cx-bubble" className="absolute w-20 h-20 bottom-0 right-24 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
+            <div id="cx-bubble" className="absolute w-16 h-16 top-1/2 right-1/3 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-white transition-transform duration-[3000ms] ease-in-out">
               <span className="text-sm font-medium">CX</span>
             </div>
           </div>
