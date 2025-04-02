@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, Mail, Linkedin, Github } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +24,10 @@ const Contact = () => {
 
     // Simulate form submission
     setTimeout(() => {
-      toast.success("Message sent successfully!");
+      toast({
+        title: "Success",
+        description: "Message sent successfully!"
+      });
       setFormData({ name: '', email: '', message: '' });
       setIsSubmitting(false);
     }, 1500);

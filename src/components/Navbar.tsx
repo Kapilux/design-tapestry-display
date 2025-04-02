@@ -44,11 +44,13 @@ const Navbar = () => {
     <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-background/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled 
+          ? "bg-[#0A2647]/95 backdrop-blur-md shadow-md" 
+          : "bg-[#0A2647]"
       )}
     >
       <div className="container-custom flex items-center justify-between h-16 lg:h-20">
-        <a href="#" className="text-xl font-bold">
+        <a href="#" className="text-xl font-bold text-white">
           UXfolio<span className="text-primary/70">.</span>
         </a>
 
@@ -58,7 +60,7 @@ const Navbar = () => {
             <button
               key={link.name}
               onClick={() => scrollToSection(link.href.substring(1))}
-              className="link-text font-medium"
+              className="text-white/80 hover:text-white font-medium transition-colors"
             >
               {link.name}
             </button>
@@ -67,7 +69,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2 focus:outline-none"
+          className="md:hidden p-2 focus:outline-none text-white"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -77,13 +79,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md shadow-lg animate-fade-in">
+        <div className="md:hidden bg-[#0A2647]/98 backdrop-blur-md shadow-lg animate-fade-in">
           <div className="container-custom py-6 flex flex-col space-y-6">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href.substring(1))}
-                className="text-lg font-medium py-2"
+                className="text-lg font-medium py-2 text-white/90 hover:text-white"
               >
                 {link.name}
               </button>
