@@ -45,8 +45,8 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled 
-          ? "bg-[#0A2647]/95 backdrop-blur-md shadow-md" 
-          : "bg-[#0A2647]"
+          ? "bg-[#0C1957]/95 backdrop-blur-md shadow-md" 
+          : "bg-[#0C1957]"
       )}
     >
       <div className="container-custom flex items-center justify-between h-16 lg:h-20">
@@ -79,7 +79,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[#0A2647]/98 backdrop-blur-md shadow-lg animate-fade-in">
+        <div className="md:hidden bg-[#0C1957]/98 backdrop-blur-md shadow-lg animate-fade-in">
           <div className="container-custom py-6 flex flex-col space-y-6">
             {navLinks.map((link) => (
               <button
