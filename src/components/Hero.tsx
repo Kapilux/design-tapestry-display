@@ -62,8 +62,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-16 bg-[#0C1957] text-white">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_70%)]"></div>
+    <section className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-16 bg-gradient-to-b from-[#0C1957] to-[#162169] text-white">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_80%)]"></div>
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_left,rgba(78,81,158,0.08),transparent_70%)]"></div>
       <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 animate-fade-in">
           <h4 className="text-white/70 font-normal">14+ Years of Experience</h4>
