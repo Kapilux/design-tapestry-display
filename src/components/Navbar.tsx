@@ -45,22 +45,22 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled 
-          ? "bg-[#0C1957]/95 backdrop-blur-md shadow-md" 
-          : "bg-[#0C1957]"
+          ? "bg-[#0F1267]/90 backdrop-blur-md shadow-md" 
+          : "bg-transparent"
       )}
     >
       <div className="container-custom flex items-center justify-between h-16 lg:h-20">
-        <a href="#" className="text-xl font-bold text-white">
-          UXfolio<span className="text-primary/70">.</span>
+        <a href="#" className="text-xl font-bold text-white tracking-tight">
+          UX<span className="font-normal text-indigo-200">folio</span>
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-10">
           {navLinks.map((link) => (
             <button
               key={link.name}
               onClick={() => scrollToSection(link.href.substring(1))}
-              className="text-white/80 hover:text-white font-medium transition-colors"
+              className="text-white/80 hover:text-white font-medium tracking-wide transition-colors"
             >
               {link.name}
             </button>
@@ -79,7 +79,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[#0C1957]/98 backdrop-blur-md shadow-lg animate-fade-in">
+        <div className="md:hidden bg-[#0F1267]/98 backdrop-blur-md shadow-lg animate-fade-in">
           <div className="container-custom py-6 flex flex-col space-y-6">
             {navLinks.map((link) => (
               <button
