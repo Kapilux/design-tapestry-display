@@ -1,9 +1,11 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
+  id: number;
   title: string;
   description: string;
   category: string;
@@ -12,11 +14,12 @@ interface ProjectCardProps {
   isLarge?: boolean;
 }
 
-const ProjectCard = ({ title, description, category, imageSrc, index, isLarge = false }: ProjectCardProps) => {
+const ProjectCard = ({ id, title, description, category, imageSrc, index, isLarge = false }: ProjectCardProps) => {
   return (
-    <div 
+    <Link 
+      to={`/case-study/${id}`}
       className={cn(
-        "group relative overflow-hidden rounded-lg bg-background border transition-all duration-300 hover:shadow-md",
+        "group relative overflow-hidden rounded-lg bg-background border transition-all duration-300 hover:shadow-md block",
         isLarge ? "col-span-2 lg:col-span-2" : "col-span-2 sm:col-span-1"
       )}
       style={{ animationDelay: `${index * 150}ms` }}
@@ -40,7 +43,7 @@ const ProjectCard = ({ title, description, category, imageSrc, index, isLarge = 
           <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
