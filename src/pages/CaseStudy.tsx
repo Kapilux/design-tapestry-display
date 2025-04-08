@@ -1,12 +1,16 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, User, Tag, Download, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { projectData } from '@/data/projects';
 import { generateCaseStudyPDF } from '@/utils/pdfGenerator';
 import { openGitLabPreview } from '@/utils/gitlabUtils';
 import { toast } from '@/hooks/use-toast';
+import CaseStudyHeader from '@/components/case-study/CaseStudyHeader';
+import CaseStudyOverview from '@/components/case-study/CaseStudyOverview';
+import CaseStudyProcess from '@/components/case-study/CaseStudyProcess';
+import CaseStudyResults from '@/components/case-study/CaseStudyResults';
+import CaseStudyFooter from '@/components/case-study/CaseStudyFooter';
 
 const CaseStudy = () => {
   const { id } = useParams();
@@ -59,98 +63,16 @@ const CaseStudy = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
-      <div className="bg-gradient-to-br from-[#0F1267] to-purple-900">
-        <div className="container-custom py-12 md:py-20">
-          <Link 
-            to="/" 
-            className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Projects
-          </Link>
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-            <h1 className="text-white">{project.title}</h1>
-            <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-0">
-              <Button 
-                variant="outline" 
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                onClick={handleGitLabPreview}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                GitLab Preview
-              </Button>
-              <Button 
-                variant="outline" 
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                onClick={handleDownload}
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download PDF
-              </Button>
-            </div>
-          </div>
-          
-          <p className="text-white/90 max-w-2xl text-xl mb-8">
-            {project.description}
-          </p>
-          
-          <div className="flex flex-wrap gap-6 text-white/80">
-            <div className="flex items-center">
-              <Calendar className="mr-2 h-4 w-4" />
-              <span>2025</span>
-            </div>
-            <div className="flex items-center">
-              <Clock className="mr-2 h-4 w-4" />
-              <span>8 weeks</span>
-            </div>
-            <div className="flex items-center">
-              <User className="mr-2 h-4 w-4" />
-              <span>Lead UX Designer</span>
-            </div>
-            <div className="flex items-center">
-              <Tag className="mr-2 h-4 w-4" />
-              <span>{project.category}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CaseStudyHeader
+        project={project}
+        onDownload={handleDownload}
+        onGitLabPreview={handleGitLabPreview}
+      />
 
       {/* Main Content */}
       <div className="container-custom py-12 md:py-20">
         {/* Overview Section */}
-        <section className="mb-20">
-          <h2 className="mb-6">Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="md:col-span-2">
-              <p className="text-muted-foreground mb-4">
-                This case study explores the research, design process, and outcomes of the {project.title} project. 
-                The client approached us with the challenge of improving their user experience while maintaining brand consistency.
-              </p>
-              <p className="text-muted-foreground">
-                Through extensive user research, iterative design, and collaborative testing, we delivered a solution that 
-                significantly improved key metrics and user satisfaction.
-              </p>
-            </div>
-            <div className="bg-muted rounded-lg p-6">
-              <h3 className="text-base font-medium mb-4">Key Outcomes</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <span>43% increase in user engagement</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <span>28% reduction in support tickets</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <span>62% improvement in task completion rates</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        <CaseStudyOverview project={project} />
 
         {/* Hero Image */}
         <img 
@@ -161,119 +83,16 @@ const CaseStudy = () => {
         />
 
         {/* Process Section */}
-        <section className="mb-20">
-          <h2 className="mb-6">The Process</h2>
-          <Separator className="mb-8" />
-          
-          <div className="space-y-16">
-            {/* Research */}
-            <div>
-              <h3 className="mb-4">1. Research & Discovery</h3>
-              <p className="text-muted-foreground mb-4">
-                We began with a comprehensive research phase, including stakeholder interviews, competitive analysis, 
-                and user surveys. This helped us identify key pain points and opportunities for improvement.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                <div className="bg-muted rounded-lg p-6">
-                  <h4 className="text-base font-medium mb-2">User Interviews</h4>
-                  <p className="text-sm text-muted-foreground">
-                    We conducted 15 user interviews to understand core needs and frustrations with the existing product.
-                  </p>
-                </div>
-                <div className="bg-muted rounded-lg p-6">
-                  <h4 className="text-base font-medium mb-2">Competitive Analysis</h4>
-                  <p className="text-sm text-muted-foreground">
-                    We analyzed 8 competing products to identify industry standards and differentiation opportunities.
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Design */}
-            <div>
-              <h3 className="mb-4">2. Design & Prototyping</h3>
-              <p className="text-muted-foreground mb-4">
-                Based on our research findings, we created wireframes and interactive prototypes. 
-                We iteratively refined these designs through multiple feedback sessions with stakeholders and users.
-              </p>
-              {/* Placeholder for design artifacts */}
-              <div className="h-64 bg-muted rounded-lg flex items-center justify-center">
-                <p className="text-muted-foreground">Design artifacts would be displayed here</p>
-              </div>
-            </div>
-            
-            {/* Testing */}
-            <div>
-              <h3 className="mb-4">3. Testing & Validation</h3>
-              <p className="text-muted-foreground mb-4">
-                We conducted usability testing with 12 participants to validate our design solutions.
-                This led to several key insights that informed our final design decisions.
-              </p>
-            </div>
-            
-            {/* Implementation */}
-            <div>
-              <h3 className="mb-4">4. Implementation & Results</h3>
-              <p className="text-muted-foreground mb-4">
-                Working closely with the development team, we implemented the new design in phases.
-                Post-launch analytics showed significant improvements across all key metrics.
-              </p>
-            </div>
-          </div>
-        </section>
+        <CaseStudyProcess />
         
         {/* Results */}
-        <section className="mb-20">
-          <h2 className="mb-6">Results & Impact</h2>
-          <p className="text-muted-foreground mb-8">
-            The redesigned experience led to measurable improvements in user satisfaction and business metrics.
-            Key performance indicators showed substantial growth following the implementation.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8 text-center border border-blue-100">
-              <p className="text-4xl font-bold text-blue-700 mb-2">43%</p>
-              <p className="text-sm text-muted-foreground">Increase in user engagement</p>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8 text-center border border-blue-100">
-              <p className="text-4xl font-bold text-blue-700 mb-2">28%</p>
-              <p className="text-sm text-muted-foreground">Reduction in support tickets</p>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8 text-center border border-blue-100">
-              <p className="text-4xl font-bold text-blue-700 mb-2">62%</p>
-              <p className="text-sm text-muted-foreground">Improvement in task completion</p>
-            </div>
-          </div>
-        </section>
+        <CaseStudyResults />
         
         {/* Next Case Study */}
-        <section>
-          <Separator className="mb-12" />
-          <div className="text-center space-y-6">
-            <h2 className="mb-6">Explore More Work</h2>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button asChild size="lg">
-                <Link to="/">View All Projects</Link>
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={handleDownload}
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download This Case Study
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={handleGitLabPreview}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                View GitLab Preview
-              </Button>
-            </div>
-          </div>
-        </section>
+        <CaseStudyFooter 
+          onDownload={handleDownload}
+          onGitLabPreview={handleGitLabPreview}
+        />
       </div>
     </div>
   );
