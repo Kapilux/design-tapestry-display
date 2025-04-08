@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, User, Tag, Download } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Tag, Download, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { projectData } from '@/data/projects';
 import { generateCaseStudyPDF } from '@/utils/pdfGenerator';
+import { openGitLabPreview } from '@/utils/gitlabUtils';
 import { toast } from '@/hooks/use-toast';
 
 const CaseStudy = () => {
@@ -39,6 +40,22 @@ const CaseStudy = () => {
     }
   };
 
+  const handleGitLabPreview = () => {
+    try {
+      openGitLabPreview(project);
+      toast({
+        title: "Preview Opened",
+        description: "GitLab preview opened in a new tab",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to open GitLab preview",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
@@ -54,14 +71,24 @@ const CaseStudy = () => {
           
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
             <h1 className="text-white">{project.title}</h1>
-            <Button 
-              variant="outline" 
-              className="mt-4 md:mt-0 bg-white/10 border-white/20 text-white hover:bg-white/20"
-              onClick={handleDownload}
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download PDF
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-0">
+              <Button 
+                variant="outline" 
+                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                onClick={handleGitLabPreview}
+              >
+                <ExternalLink className="mr-2 h-4 w-4" />
+                GitLab Preview
+              </Button>
+              <Button 
+                variant="outline" 
+                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                onClick={handleDownload}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download PDF
+              </Button>
+            </div>
           </div>
           
           <p className="text-white/90 max-w-2xl text-xl mb-8">
@@ -235,6 +262,14 @@ const CaseStudy = () => {
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download This Case Study
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={handleGitLabPreview}
+              >
+                <ExternalLink className="mr-2 h-4 w-4" />
+                View GitLab Preview
               </Button>
             </div>
           </div>
