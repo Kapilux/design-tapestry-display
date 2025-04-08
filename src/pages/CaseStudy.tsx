@@ -1,10 +1,11 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, User, Tag } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Tag, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { projectData } from '@/data/projects';
+import { generateCaseStudyPDF } from '@/utils/pdfGenerator';
+import { toast } from '@/hooks/use-toast';
 
 const CaseStudy = () => {
   const { id } = useParams();
@@ -22,6 +23,22 @@ const CaseStudy = () => {
     );
   }
 
+  const handleDownload = () => {
+    try {
+      generateCaseStudyPDF(project);
+      toast({
+        title: "Success",
+        description: "Case study PDF has been downloaded",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate PDF",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
@@ -35,7 +52,17 @@ const CaseStudy = () => {
             Back to Projects
           </Link>
           
-          <h1 className="text-white mb-6">{project.title}</h1>
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h1 className="text-white">{project.title}</h1>
+            <Button 
+              variant="outline" 
+              className="mt-4 md:mt-0 bg-white/10 border-white/20 text-white hover:bg-white/20"
+              onClick={handleDownload}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download PDF
+            </Button>
+          </div>
           
           <p className="text-white/90 max-w-2xl text-xl mb-8">
             {project.description}
@@ -195,11 +222,21 @@ const CaseStudy = () => {
         {/* Next Case Study */}
         <section>
           <Separator className="mb-12" />
-          <div className="text-center">
+          <div className="text-center space-y-6">
             <h2 className="mb-6">Explore More Work</h2>
-            <Button asChild size="lg">
-              <Link to="/">View All Projects</Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button asChild size="lg">
+                <Link to="/">View All Projects</Link>
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={handleDownload}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download This Case Study
+              </Button>
+            </div>
           </div>
         </section>
       </div>
