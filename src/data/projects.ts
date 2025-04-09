@@ -11,7 +11,7 @@ export interface Project {
 export const projectData: Project[] = [
   {
     id: 1,
-    title: "Financial App Redesign",
+    title: "Business Insurance Website Revamp",
     description: "Complete UX overhaul of a legacy banking platform, resulting in 43% increase in user engagement and 28% reduction in support tickets.",
     category: "Mobile App",
     imageSrc: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
