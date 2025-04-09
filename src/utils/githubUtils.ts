@@ -3,7 +3,7 @@ import { Project } from '@/data/projects';
 
 // Configuration options - these would typically come from environment variables
 const GITHUB_USERNAME = 'Kapilux'; // Replace with your GitHub username
-const GITHUB_REPO = 'design-tapestry-display';    // Replace with your repository name
+const GITHUB_REPO = 'Kapilux/design-tapestry-display';    // Replace with your repository name
 
 /**
  * Generates a GitHub Pages preview URL for a project
