@@ -7,10 +7,10 @@ import { Separator } from '@/components/ui/separator';
 
 interface CaseStudyFooterProps {
   onDownload: () => void;
-  onGitLabPreview: () => void;
+  onGitHubPreview: () => void;
 }
 
-const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ onDownload, onGitLabPreview }) => {
+const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ onDownload, onGitHubPreview }) => {
   return (
     <section>
       <Separator className="mb-12" />
@@ -31,10 +31,10 @@ const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ onDownload, onGitLabP
           <Button 
             variant="outline" 
             size="lg" 
-            onClick={onGitLabPreview}
+            onClick={onGitHubPreview}
           >
             <ExternalLink className="mr-2 h-4 w-4" />
-            View GitLab Preview
+            View GitHub Preview
           </Button>
         </div>
       </div>

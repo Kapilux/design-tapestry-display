@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { projectData } from '@/data/projects';
 import { generateCaseStudyPDF } from '@/utils/pdfGenerator';
-import { openGitLabPreview } from '@/utils/gitlabUtils';
+import { openGitHubPreview } from '@/utils/githubUtils';
 import { toast } from '@/hooks/use-toast';
 import CaseStudyHeader from '@/components/case-study/CaseStudyHeader';
 import CaseStudyOverview from '@/components/case-study/CaseStudyOverview';
@@ -44,17 +43,17 @@ const CaseStudy = () => {
     }
   };
 
-  const handleGitLabPreview = () => {
+  const handleGitHubPreview = () => {
     try {
-      openGitLabPreview(project);
+      openGitHubPreview(project);
       toast({
         title: "Preview Opened",
-        description: "GitLab preview opened in a new tab",
+        description: "GitHub preview opened in a new tab",
       });
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to open GitLab preview",
+        description: "Failed to open GitHub preview",
         variant: "destructive",
       });
     }
@@ -66,7 +65,7 @@ const CaseStudy = () => {
       <CaseStudyHeader
         project={project}
         onDownload={handleDownload}
-        onGitLabPreview={handleGitLabPreview}
+        onGitHubPreview={handleGitHubPreview}
       />
 
       {/* Main Content */}
@@ -91,7 +90,7 @@ const CaseStudy = () => {
         {/* Next Case Study */}
         <CaseStudyFooter 
           onDownload={handleDownload}
-          onGitLabPreview={handleGitLabPreview}
+          onGitHubPreview={handleGitHubPreview}
         />
       </div>
     </div>

@@ -8,13 +8,13 @@ import { Project } from '@/data/projects';
 interface CaseStudyHeaderProps {
   project: Project;
   onDownload: () => void;
-  onGitLabPreview: () => void;
+  onGitHubPreview: () => void;
 }
 
 const CaseStudyHeader: React.FC<CaseStudyHeaderProps> = ({ 
   project, 
   onDownload, 
-  onGitLabPreview 
+  onGitHubPreview 
 }) => {
   return (
     <div className="bg-gradient-to-br from-[#0F1267] to-purple-900">
@@ -33,10 +33,10 @@ const CaseStudyHeader: React.FC<CaseStudyHeaderProps> = ({
             <Button 
               variant="outline" 
               className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-              onClick={onGitLabPreview}
+              onClick={onGitHubPreview}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
-              GitLab Preview
+              GitHub Preview
             </Button>
             <Button 
               variant="outline" 
